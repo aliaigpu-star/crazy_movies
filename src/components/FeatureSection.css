@@ -1,0 +1,84 @@
+.feature-section {
+  background-color: var(--bg-black);
+  color: white;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mockup-container {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.phone-mockup {
+  position: relative;
+  border: 10px solid #000;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
+  background: #000;
+}
+
+.phone-mockup img {
+  border-radius: 30px;
+  display: block;
+  opacity: 0.8;
+  transition: opacity 0.5s ease;
+}
+
+.phone-mockup:hover img {
+  opacity: 1;
+}
+
+.floating-ui {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  transition: var(--transition-smooth);
+}
+
+.floating-ui:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--primary-red);
+}
+
+.card-1 {
+  top: 15%;
+  left: -15%;
+  width: 200px;
+}
+
+.card-2 {
+  bottom: 12%;
+  right: -10%;
+  width: 130px;
+  text-align: center;
+}
+
+.feature-icon-box {
+  width: 65px;
+  height: 65px;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-red);
+  transition: var(--transition-smooth);
+}
+
+.feature-item:hover .feature-icon-box {
+  background: var(--primary-red);
+  color: white;
+  transform: rotate(5deg);
+}
+
+@media (max-width: 991.98px) {
+  .mockup-container { max-width: 380px; }
+  .card-1, .card-2 { display: none; }
+}
