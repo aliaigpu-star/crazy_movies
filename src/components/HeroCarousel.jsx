@@ -34,34 +34,36 @@ const HeroCarousel = () => {
             >
               <Container className="h-100 d-flex align-items-center">
                 <Row>
-                  <Col lg={8} md={10}>
-                    <div className="mb-4 hero-tags">
-                       {movie.tags.map((tag, index) => (
-                         <span key={index} className="badge bg-primary-red me-2 text-uppercase py-2 px-3 shadow-sm" style={{fontSize: '0.7rem', borderRadius: '30px'}}>{tag}</span>
-                       ))}
-                    </div>
-                    <h1 className="display-1 fw-bold mb-3 movie-title-hero text-glow">
-                      {movie.title}
-                    </h1>
-                    <div className="hero-meta mb-4">
-                      <span className="fw-bold text-primary-red d-flex align-items-center gap-2">
-                        <i className="bi bi-shield-check-fill fs-5"></i> {movie.rating}
-                      </span>
-                      <span>{movie.year}</span>
-                      <span className="d-flex align-items-center gap-2">
-                        <i className="bi bi-hdd-network"></i> {movie.duration}
-                      </span>
-                    </div>
-                    <p className="movie-description-hero d-none d-md-block mb-5">
-                      {movie.description}
-                    </p>
-                    <div className="hero-btns">
-                      <button 
-                        className="btn btn-primary-red px-5 py-3 fw-bold glow-on-hover"
-                        onClick={() => document.querySelector('.shows-grid-section')?.scrollIntoView({ behavior: 'smooth' })}
-                      >
-                        EXPLORE YOUR VAULT
-                      </button>
+                  <Col lg={7} md={9}>
+                    <div className="hero-content-box glass-card p-4 p-md-5 reveal visible" style={{ backdropFilter: 'blur(10px)', borderLeft: '4px solid var(--primary)' }}>
+                      <div className="mb-4 hero-tags">
+                         {movie.tags.map((tag, index) => (
+                           <span key={index} className="badge bg-primary-red me-2 text-uppercase py-2 px-3 shadow-sm" style={{fontSize: '0.7rem', borderRadius: '30px'}}>{tag}</span>
+                         ))}
+                      </div>
+                      <h1 className="display-2 fw-bold mb-3 movie-title-hero text-glow">
+                        {movie.title}
+                      </h1>
+                      <div className="hero-meta mb-4">
+                        <span className="fw-bold text-primary-red d-flex align-items-center gap-2">
+                          <i className="bi bi-shield-check-fill fs-5"></i> {movie.rating}
+                        </span>
+                        <span>{movie.year}</span>
+                        <span className="d-flex align-items-center gap-2">
+                          <i className="bi bi-hdd-network"></i> {movie.duration}
+                        </span>
+                      </div>
+                      <p className="movie-description-hero d-none d-md-block mb-5">
+                        {movie.description}
+                      </p>
+                      <div className="hero-btns">
+                        <button 
+                          className="btn btn-primary-red px-5 py-3 fw-bold glow-on-hover"
+                          onClick={() => document.querySelector('.shows-grid-section')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                          EXPLORE YOUR VAULT
+                        </button>
+                      </div>
                     </div>
                   </Col>
                 </Row>

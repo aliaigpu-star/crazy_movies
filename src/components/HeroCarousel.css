@@ -20,7 +20,7 @@
   image-rendering: -webkit-optimize-contrast; /* Sharpen the image */
 }
 
-/* Dynamic overlay - unified color for consistency */
+/* Dynamic overlay - kept very light to ensure both sides are clear */
 .carousel-bg::before {
   content: '';
   position: absolute;
@@ -28,13 +28,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg-base);
-  opacity: 0.85; /* Strong opacity to unify the colors */
+  background: rgba(0,0,0,0.25); /* Very light consistent tint */
   z-index: 1;
 }
 
 [data-theme="light"] .carousel-bg::before {
-  opacity: 0.92; /* Even more solid in light mode */
+  background: rgba(255,255,255,0.15); /* Almost transparent in light mode */
 }
 
 .carousel-bg {
