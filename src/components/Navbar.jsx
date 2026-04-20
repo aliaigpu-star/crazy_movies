@@ -34,15 +34,12 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto fw-medium fs-6">
             <Nav.Link href="#home" className="px-3">HOME</Nav.Link>
-            <Nav.Link href="#movies" className="px-3">MOVIES</Nav.Link>
-            <Nav.Link href="#tv-shows" className="px-3">TV SHOWS</Nav.Link>
-            <Nav.Link href="#audiobook" className="px-3">AUDIOBOOK</Nav.Link>
-            <Nav.Link href="#blog" className="px-3">BLOG</Nav.Link>
+            <Nav.Link href="#movies-section" className="px-3">MOVIES</Nav.Link>
           </Nav>
           <div className="d-flex align-items-center nav-icons">
-            <Nav.Link href="#search" className="text-white me-3 fs-5"><FaSearch /></Nav.Link>
-            <Nav.Link href="#account" className="text-white fs-4"><FaUserCircle /></Nav.Link>
-            <button className="btn btn-primary-red ms-3 d-none d-lg-block btn-sm px-3 py-1">Subscribe</button>
+            <span className="text-white-50 small d-none d-lg-block">
+              <i className="bi bi-shield-lock-fill me-1 text-primary-red"></i> Private Vault
+            </span>
           </div>
         </Navbar.Collapse>
       </Container>

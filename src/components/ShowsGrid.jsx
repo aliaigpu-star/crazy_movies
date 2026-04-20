@@ -12,7 +12,7 @@ import AdGateModal from './AdGateModal';
 
 const ShowsGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('All');
+
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -101,11 +101,9 @@ const ShowsGrid = () => {
     return () => clearTimeout(t);
   }, [downloadFeedback]);
 
-  const filteredMovies = movies.filter(movie => {
-    const matchesTab = activeTab === 'All' || movie.category === activeTab;
-    const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesSearch;
-  });
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (loading) return (
     <div className="text-center py-5">
@@ -118,10 +116,11 @@ const ShowsGrid = () => {
     <section className="shows-grid-section py-5" id="movies-section">
       <Container className="px-4">
         <div className="text-center mb-5">
-          <h6 className="text-primary-red text-uppercase fw-bold mb-1 tracking-widest" style={{letterSpacing: '3px'}}>Secure Media Library</h6>
-          <h2 className="fw-bold display-5 mb-4 text-white text-glow">Drive Movies Vault</h2>
+          <h6 className="text-primary-red text-uppercase fw-bold mb-1" style={{letterSpacing: '3px'}}>Secure Media Library</h6>
+          <h2 className="fw-bold display-5 mb-3 text-white text-glow">Drive Movies Vault</h2>
+          <p className="text-muted mb-4">{movies.length} movies in your vault</p>
           
-          <div className="max-w-md mx-auto mb-5">
+          <div className="mx-auto mb-5">
             <div className="search-input-group d-flex align-items-center mx-auto" style={{maxWidth: '500px'}}>
               <i className="bi bi-search text-muted me-3"></i>
               <input 
@@ -131,22 +130,16 @@ const ShowsGrid = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+              {searchQuery && (
+                <button 
+                  className="btn btn-sm text-muted border-0" 
+                  onClick={() => setSearchQuery('')}
+                >
+                  <i className="bi bi-x-lg"></i>
+                </button>
+              )}
             </div>
           </div>
-
-          <Nav variant="pills" className="justify-content-center custom-tabs mb-4">
-            {['All', 'Action', 'Sci-Fi', 'Fantasy', 'Drama'].map((tab) => (
-              <Nav.Item key={tab}>
-                <Nav.Link 
-                  active={activeTab === tab} 
-                  onClick={() => setActiveTab(tab)}
-                  className="px-4 py-2 mx-1 rounded-pill"
-                >
-                  {tab}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
         </div>
 
         {error && <Alert variant="danger" className="bg-dark text-danger border-danger glass-card">{error}</Alert>}
@@ -219,6 +212,18 @@ const ShowsGrid = () => {
             );
           })}
         </Row>
+
+        {/* Empty state when search has no results */}
+        {filteredMovies.length === 0 && !loading && (
+          <div className="text-center py-5">
+            <i className="bi bi-film display-1 text-muted opacity-25 mb-3 d-block"></i>
+            <h5 className="text-muted">No movies found</h5>
+            <p className="text-muted small">Try a different search term</p>
+            <Button variant="outline-secondary" size="sm" onClick={() => setSearchQuery('')}>
+              Clear Search
+            </Button>
+          </div>
+        )}
 
         {/* Video Player Modal — Watch Online */}
         <Modal 
