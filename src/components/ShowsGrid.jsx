@@ -202,10 +202,16 @@ const ShowsGrid = () => {
                     )}
                   </div>
                   <Card.Body className="px-3 pt-3 pb-4">
-                    <Card.Title className="fs-6 fw-bold mb-2 text-truncate">{movie.title}</Card.Title>
+                    <Card.Title className="fs-6 fw-bold mb-2 text-truncate" style={{ color: 'var(--text-primary)' }}>
+                      {movie.title}
+                    </Card.Title>
                     <div className="d-flex justify-content-between align-items-center small mt-1">
-                      <span className="text-uppercase tracking-wider text-muted fw-semibold">{movie.category}</span>
-                      <span className="fw-bold opacity-50 px-2 py-1 rounded bg-secondary-subtle">2024</span>
+                      <span className="text-uppercase tracking-wider fw-bold" style={{ color: 'var(--primary)', fontSize: '0.7rem' }}>
+                        {movie.category}
+                      </span>
+                      <span className="fw-bold opacity-75 px-2 py-1 rounded bg-secondary-subtle" style={{ color: 'var(--text-primary)', fontSize: '0.75rem' }}>
+                        2026
+                      </span>
                     </div>
                   </Card.Body>
                 </Card>

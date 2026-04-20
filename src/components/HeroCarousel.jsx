@@ -11,7 +11,7 @@ const heroContent = [
     tags: ["Cloud Storage", "Instant Sync", "Secure"],
     description: "Stream and download your personal movie collection directly from Google Drive. Premium speed, high-quality playback, and secure one-time download capability.",
     rating: "Premium",
-    year: "2024",
+    year: "2026",
     duration: "Unlimited Storage"
   }
 ];
