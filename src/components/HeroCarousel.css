@@ -51,26 +51,22 @@
 .movie-title-hero {
   font-weight: 800;
   letter-spacing: -2px;
-  line-height: 1.1;
-  color: var(--text-primary);
-  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.1));
-}
-
-[data-theme="light"] .movie-title-hero {
-  color: #1a1a2e; /* Force deeper contrast in light mode */
-  text-shadow: none;
+  line-height: 1;
+  color: #ffffff !important; /* Force white for cinematic look */
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .movie-description-hero {
   max-width: 650px;
   font-size: 1.15rem;
   line-height: 1.8;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.9) !important; /* Force light gray/white */
   z-index: 2;
   position: relative;
   border-left: 3px solid var(--primary);
   padding-left: 2rem;
   letter-spacing: 0.3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .hero-meta {
@@ -78,7 +74,17 @@
   align-items: center;
   gap: 20px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="light"] .movie-title-hero,
+[data-theme="light"] .movie-description-hero,
+[data-theme="light"] .hero-meta {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .hero-content-box {
+  background: rgba(0, 0, 0, 0.6) !important; /* Darker box in light mode for white text */
 }
 
 .carousel-indicators [data-bs-target] {
