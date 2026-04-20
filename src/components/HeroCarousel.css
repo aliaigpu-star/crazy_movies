@@ -20,7 +20,7 @@
   image-rendering: -webkit-optimize-contrast; /* Sharpen the image */
 }
 
-/* Dynamic overlay - kept minimal to let 4K quality show */
+/* Dynamic overlay - unified color for consistency */
 .carousel-bg::before {
   content: '';
   position: absolute;
@@ -28,16 +28,25 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(75deg, var(--bg-base) 0%, rgba(0, 0, 0, 0.2) 100%);
+  background: var(--bg-base);
+  opacity: 0.85; /* Strong opacity to unify the colors */
   z-index: 1;
 }
 
 [data-theme="light"] .carousel-bg::before {
-  background: linear-gradient(90deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 60%, transparent 100%);
+  opacity: 0.92; /* Even more solid in light mode */
+}
+
+.carousel-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  filter: saturate(0.5) brightness(0.8); /* Unify the image colors */
 }
 
 .carousel-item.active .carousel-bg {
-  transform: none; /* Removed transform to prevent interpolation blur */
+  transform: none; 
 }
 
 .movie-title-hero {
