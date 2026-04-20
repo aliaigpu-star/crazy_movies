@@ -209,7 +209,7 @@ const ShowsGrid = () => {
                       <span className="text-uppercase tracking-wider fw-bold" style={{ color: 'var(--primary)', fontSize: '0.7rem' }}>
                         {movie.category}
                       </span>
-                      <span className="fw-bold opacity-75 px-2 py-1 rounded bg-secondary-subtle" style={{ color: 'var(--text-primary)', fontSize: '0.75rem' }}>
+                      <span className="fw-bold px-2 py-1 rounded shadow-sm" style={{ backgroundColor: 'var(--primary)', color: 'white', fontSize: '0.75rem', border: '1px solid rgba(255,255,255,0.1)' }}>
                         2026
                       </span>
                     </div>
