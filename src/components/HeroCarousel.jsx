@@ -3,7 +3,7 @@ import { Carousel, Container, Row, Col } from 'react-bootstrap';
 import './HeroCarousel.css';
 import heroBanner from '../assets/hero-banner.png';
 
-const movies = [
+const heroContent = [
   {
     id: 1,
     title: "Drive Media Vault",
@@ -18,7 +18,7 @@ const movies = [
 
 const HeroCarousel = () => {
   return (
-    <div className="hero-section">
+    <div className="hero-section" id="home">
       <Carousel 
         fade 
         interval={10000} 
@@ -26,38 +26,41 @@ const HeroCarousel = () => {
         indicators={true}
         className="hero-carousel"
       >
-        {movies.map((movie) => (
+        {heroContent.map((movie) => (
           <Carousel.Item key={movie.id}>
             <div 
               className="carousel-bg" 
-              style={{ backgroundImage: `linear-gradient(to right, rgba(8, 8, 8, 0.95) 0%, rgba(8, 8, 8, 0.4) 60%, rgba(8, 8, 8, 0.2) 100%), url(${movie.image})` }}
+              style={{ backgroundImage: `url(${movie.image})` }}
             >
               <Container className="h-100 d-flex align-items-center">
                 <Row>
-                  <Col lg={8} md={10} className="text-white">
-                    <div className="mb-3 reveal visible">
+                  <Col lg={8} md={10}>
+                    <div className="mb-4 hero-tags">
                        {movie.tags.map((tag, index) => (
-                         <span key={index} className="badge bg-primary-red me-2 text-uppercase py-2 px-3" style={{fontSize: '0.7rem', borderRadius: '20px'}}>{tag}</span>
+                         <span key={index} className="badge bg-primary-red me-2 text-uppercase py-2 px-3 shadow-sm" style={{fontSize: '0.7rem', borderRadius: '30px'}}>{tag}</span>
                        ))}
                     </div>
-                    <h1 className="display-1 fw-bold mb-3 movie-title text-glow">
+                    <h1 className="display-1 fw-bold mb-3 movie-title-hero text-glow">
                       {movie.title}
                     </h1>
-                    <div className="d-flex align-items-center mb-4 movie-meta text-muted">
-                      <span className="me-3 fw-bold text-primary-red"><i className="bi bi-shield-check"></i> {movie.rating}</span>
-                      <span className="me-3">{movie.year}</span>
-                      <span className="me-3"><i className="bi bi-hdd-network me-1"></i> {movie.duration}</span>
-                      <span className="badge border border-secondary text-secondary">PRIVATE ACCESS</span>
+                    <div className="hero-meta mb-4">
+                      <span className="fw-bold text-primary-red d-flex align-items-center gap-2">
+                        <i className="bi bi-shield-check-fill fs-5"></i> {movie.rating}
+                      </span>
+                      <span>{movie.year}</span>
+                      <span className="d-flex align-items-center gap-2">
+                        <i className="bi bi-hdd-network"></i> {movie.duration}
+                      </span>
                     </div>
-                    <p className="lead mb-5 movie-description d-none d-md-block opacity-75" style={{maxWidth: '600px'}}>
+                    <p className="movie-description-hero d-none d-md-block mb-5">
                       {movie.description}
                     </p>
-                    <div className="d-flex gap-3 hero-btns">
+                    <div className="hero-btns">
                       <button 
                         className="btn btn-primary-red px-5 py-3 fw-bold glow-on-hover"
                         onClick={() => document.querySelector('.shows-grid-section')?.scrollIntoView({ behavior: 'smooth' })}
                       >
-                        EXPLORE VAULT
+                        EXPLORE YOUR VAULT
                       </button>
                     </div>
                   </Col>

@@ -3,7 +3,7 @@
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-black);
+  background-color: var(--bg-base);
 }
 
 .hero-carousel,
@@ -17,10 +17,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: transform 12s linear;
+  transition: transform 15s linear;
 }
 
-/* Sharp linear gradient for text readability and cinematic look */
+/* Dynamic overlay based on theme */
 .carousel-bg::before {
   content: '';
   position: absolute;
@@ -28,70 +28,71 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(75deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 40%, transparent 100%);
+  background: linear-gradient(75deg, var(--bg-base) 0%, rgba(15, 15, 19, 0.7) 40%, transparent 100%);
   z-index: 1;
 }
 
+[data-theme="light"] .carousel-bg::before {
+  background: linear-gradient(75deg, var(--bg-base) 0%, rgba(245, 245, 247, 0.6) 40%, transparent 100%);
+}
+
 .carousel-item.active .carousel-bg {
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
-.text-glow {
-  text-shadow: 0 0 30px rgba(255, 11, 23, 0.5);
-  background: linear-gradient(to bottom, #fff 40%, #ccc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.movie-title-hero {
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--text-primary);
 }
 
-.movie-description {
+.movie-description-hero {
   max-width: 650px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.8;
-  opacity: 0.8;
+  color: var(--text-secondary);
   z-index: 2;
   position: relative;
-  border-left: 2px solid var(--primary-red);
-  padding-left: 1.5rem;
-  letter-spacing: 0.5px;
+  border-left: 3px solid var(--primary);
+  padding-left: 2rem;
+  letter-spacing: 0.3px;
 }
 
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
 
 .carousel-indicators [data-bs-target] {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: #fff;
-  opacity: 0.3;
-  margin: 0 10px;
+  background-color: var(--text-muted);
+  opacity: 0.5;
+  margin: 0 8px;
   border: none;
-  transition: var(--transition-smooth);
+  transition: var(--transition);
 }
 
 .carousel-indicators .active {
-  background-color: var(--primary-red);
+  background-color: var(--primary);
   opacity: 1;
-  width: 40px;
+  width: 30px;
   border-radius: 10px;
 }
 
-/* Enhanced entrance animations */
-.carousel-item.active .movie-title { animation: slideInLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-.carousel-item.active .movie-meta { animation: fadeIn 1.2s ease-out forwards; animation-delay: 0.3s; opacity: 0; }
-.carousel-item.active .movie-description { animation: slideInLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; animation-delay: 0.5s; opacity: 0; }
-.carousel-item.active .hero-btns { animation: fadeIn 1s ease-out forwards; animation-delay: 0.8s; opacity: 0; }
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+/* Animations */
+.carousel-item.active .movie-title-hero { animation: fadeInUp 0.8s forwards; }
+.carousel-item.active .hero-tags { animation: fadeInUp 0.8s forwards; animation-delay: 0.2s; opacity: 0; }
+.carousel-item.active .hero-meta { animation: fadeInUp 0.8s forwards; animation-delay: 0.4s; opacity: 0; }
+.carousel-item.active .movie-description-hero { animation: fadeInUp 0.8s forwards; animation-delay: 0.6s; opacity: 0; }
+.carousel-item.active .hero-btns { animation: fadeInUp 0.8s forwards; animation-delay: 0.8s; opacity: 0; }
 
 @media (max-width: 991.98px) {
-  .movie-title { font-size: 3.5rem; }
-  .carousel-bg::before { background: rgba(0, 0, 0, 0.7); }
+  .movie-title-hero { font-size: 3.5rem; letter-spacing: -1px; }
+  .carousel-bg::before { background: var(--bg-overlay); }
 }

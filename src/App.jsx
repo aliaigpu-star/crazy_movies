@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App bg-dark-custom min-vh-100 text-white">
+    <div className="App min-vh-100">
       <NavigationBar />
       <main>
         <HeroCarousel />

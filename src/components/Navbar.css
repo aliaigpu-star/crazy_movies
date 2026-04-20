@@ -2,65 +2,95 @@
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
               padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
               backdrop-filter 0.4s ease;
-  padding: 1.5rem 0;
+  padding: 1.2rem 0;
   z-index: 1050;
   background-color: transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .custom-navbar.scrolled {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--bg-overlay);
   padding: 0.8rem 0;
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
 }
 
-.custom-navbar .nav-link {
-  color: #fff !important;
+.brand-logo {
+  transition: var(--transition);
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+.brand-text {
+  color: var(--text-primary);
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.logo-icon {
+  background: var(--primary);
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+  box-shadow: var(--shadow-glow);
+}
+
+.nav-item-custom {
+  color: var(--text-primary) !important;
   font-weight: 600;
-  letter-spacing: 0.8px;
-  transition: var(--transition-smooth);
+  letter-spacing: 1px;
+  transition: var(--transition);
   position: relative;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
-.custom-navbar .nav-link:hover,
-.custom-navbar .nav-link.active {
-  color: var(--primary-red) !important;
+.nav-item-custom:hover {
   opacity: 1;
+  color: var(--primary) !important;
 }
 
-.custom-navbar .nav-link::after {
+.nav-item-custom::after {
   content: '';
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -2px;
-  left: 1rem;
-  background-color: var(--primary-red);
-  transition: width 0.3s ease;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--primary);
+  transition: var(--transition);
+  transform: translateX(-50%);
 }
 
-.custom-navbar .nav-link:hover::after,
-.custom-navbar .nav-link.active::after {
-  width: calc(100% - 2rem);
+.nav-item-custom:hover::after {
+  width: 20px;
 }
 
-.logo-icon {
-  background: var(--primary-red);
-  color: white;
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 0.85em;
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+.vault-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.nav-icons .nav-link:hover {
-  transform: scale(1.1);
+.vault-status i {
+  color: var(--primary);
 }
 
 @media (max-width: 991.98px) {
   .custom-navbar {
-    background-color: rgba(13, 13, 13, 0.98);
-    padding: 1rem 0;
+    background-color: var(--bg-surface);
+    padding: 0.8rem 0;
   }
 }

@@ -12,6 +12,11 @@ export default function AdGateModal({
 }) {
   const [secondsLeft, setSecondsLeft] = useState(waitSeconds);
   const [busy, setBusy] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    setTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+  }, [show]);
 
   const canContinue = secondsLeft <= 0 && !busy;
 
@@ -47,53 +52,57 @@ export default function AdGateModal({
       onHide={busy ? undefined : onHide}
       centered
       size="lg"
-      contentClassName="bg-dark border-0 overflow-hidden"
+      contentClassName="border-0 overflow-hidden glass-card"
+      style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
     >
-      <Modal.Header closeButton closeVariant="white" className="border-0">
-        <Modal.Title className="text-white fs-5">One short ad to download</Modal.Title>
+      <Modal.Header closeButton closeVariant={theme === 'dark' ? 'white' : undefined} className="border-0">
+        <Modal.Title className="fs-5 fw-bold">Download Authentication</Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-4">
-        <p className="text-white mb-2">
-          Please watch the ad to unlock the download for <strong>{title}</strong>.
+        <p className="mb-2">
+          Verify your request to unlock <strong>{title}</strong>.
         </p>
-        <p className="text-muted small mb-3">
-          This helps keep the site running. After the timer ends, you can continue.
+        <p className="text-secondary small mb-4">
+          This secure gate ensures the safety of our drive vault. The download button will activate after the cooldown.
         </p>
 
-        <div className="ad-slot rounded-3 border border-secondary-subtle bg-black d-flex align-items-center justify-content-center mb-3">
-          <div className="text-center px-3">
-            <div className="text-white fw-bold mb-1">Ad Space</div>
-            <div className="text-muted small">
-              Put your ad code here (AdSense / interstitial / video ad).
+        <div className="ad-slot rounded-4 border bg-black d-flex align-items-center justify-content-center mb-4 shadow-inner">
+          <div className="text-center px-3 py-5">
+            <div className="text-white opacity-25 display-4 mb-2">
+               <i className="bi bi-shield-lock"></i>
+            </div>
+            <div className="text-white fw-bold mb-1 fs-5">Security Check in Progress</div>
+            <div className="text-white-50 small">
+              Analyzing connection security...
             </div>
           </div>
         </div>
 
         <div className="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-          <div className="text-muted small">
+          <div className="small fw-semibold">
             {secondsLeft > 0 ? (
-              <>
-                Unlocking in <strong>{secondsLeft}s</strong>…
-              </>
+              <span className="text-secondary">
+                Verifying in 1, <strong>{secondsLeft}s</strong>…
+              </span>
             ) : (
-              <>
-                <strong>Unlocked.</strong> You can continue.
-              </>
+              <span className="text-success">
+                <i className="bi bi-check-circle-fill me-2"></i>Verified. Safe to proceed.
+              </span>
             )}
           </div>
 
           <Button
             variant="danger"
-            className="btn-primary-red px-4 fw-bold"
+            className="btn-primary-red px-5 fw-bold"
             onClick={handleContinue}
             disabled={!canContinue}
           >
             {busy ? (
               <>
-                <Spinner animation="border" size="sm" className="me-2" /> Preparing…
+                <Spinner animation="border" size="sm" className="me-2" /> Unlocking...
               </>
             ) : (
-              'Continue to download'
+              'Get My Movie'
             )}
           </Button>
         </div>
@@ -101,4 +110,3 @@ export default function AdGateModal({
     </Modal>
   );
 }
-

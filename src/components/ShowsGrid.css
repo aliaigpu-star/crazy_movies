@@ -1,34 +1,37 @@
 .shows-grid-section {
-  background-color: var(--bg-black);
-  padding-top: 80px;
+  background-color: var(--bg-base);
+  padding: 100px 0;
+  transition: background-color 0.4s ease;
 }
 
 .grid-show-card {
-  transition: transform 0.3s ease;
+  transition: var(--transition-spring);
   overflow: hidden;
-  border-radius: 12px !important;
+  border-radius: var(--radius-md) !important;
   background: var(--bg-card) !important;
+  border: 1px solid var(--glass-border) !important;
 }
 
 .grid-show-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-hover) !important;
 }
 
 .grid-img-container {
   position: relative;
-  aspect-ratio: 2/3;
   overflow: hidden;
+  background-color: var(--bg-elevated);
 }
 
 .grid-img-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .grid-show-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .grid-overlay {
@@ -37,13 +40,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.7);
+  background: var(--bg-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(4px);
+  transition: opacity 0.35s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .grid-img-container:hover .grid-overlay {
@@ -52,70 +56,49 @@
 
 .downloaded-badge {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #28a745;
+  top: 15px;
+  right: 15px;
   color: white;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 2;
-}
-
-.custom-tabs .nav-link {
-  color: var(--text-muted) !important;
-  border: 1px solid var(--glass-border);
-  margin: 0 5px;
+  padding: 6px 14px;
   border-radius: 30px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.custom-tabs .nav-link.active {
-  background-color: var(--primary-red) !important;
-  color: white !important;
-  border-color: var(--primary-red) !important;
-  box-shadow: 0 0 15px var(--primary-red-glow);
-}
-
-.btn-primary-blue {
-  background-color: #0d6efd !important;
-  border-color: #0d6efd !important;
-  box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
-  transition: all 0.3s ease;
-}
-
-.btn-primary-blue:hover {
-  background-color: #0b5ed7 !important;
-  box-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
-  transform: scale(1.02);
+  font-size: 0.7rem;
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 2;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .movie-player-modal .modal-content {
-  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  box-shadow: 0 0 80px rgba(0,0,0,0.9);
+  border-radius: var(--radius-lg);
 }
 
 .movie-player-modal video {
-  border-bottom: 2px solid var(--primary-red);
+  border-bottom: 3px solid var(--primary);
 }
 
 .ad-slot {
-  min-height: 220px;
+  min-height: 250px;
+  background: linear-gradient(135deg, #000, #1a1a1a);
+  border-style: dashed !important;
+}
+
+.border-dashed {
+  border-style: dashed !important;
+  border-width: 2px !important;
 }
 
 /* Download feedback alert */
 .download-feedback-alert {
-  border-radius: 12px !important;
-  animation: slideDownFade 0.4s ease-out;
-  font-weight: 500;
+  border-radius: var(--radius-md) !important;
+  animation: slideDownFade 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @keyframes slideDownFade {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-25px);
   }
   to {
     opacity: 1;
@@ -126,15 +109,16 @@
 @media (max-width: 768px) {
   .grid-overlay {
     opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
     backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     align-items: center;
     justify-content: flex-end;
-    padding-bottom: 20px;
+    padding: 20px;
   }
   
   .grid-overlay .btn {
-    font-size: 0.8rem;
-    padding: 8px 0 !important;
+    font-size: 0.75rem;
+    padding: 10px 0 !important;
   }
 }
