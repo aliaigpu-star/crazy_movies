@@ -21,38 +21,66 @@ export default async function handler(req, res) {
     const allResponses = await Promise.all(folderIds.map(folderId => 
       drive.files.list({
         q: `'${folderId}' in parents and trashed = false`,
-        fields: 'files(id, name, mimeType, thumbnailLink, size)',
+        fields: 'files(id, name, mimeType, thumbnailLink, size, webContentLink)',
+        pageSize: 1000
       })
     ));
 
     const allFiles = allResponses.flatMap(response => response.data.files || []);
 
-    // DEBUG: Log every file found to see what's actually in there
     console.log('--- SCANNING DRIVE ---');
-    allFiles.forEach(f => console.log(`Found: "${f.name}" | Type: ${f.mimeType}`));
-    console.log('----------------------');
+    console.log(`Found ${allFiles.length} total files across folders.`);
 
     const videoExtensions = ['.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv'];
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
 
-    const movies = allFiles
-      .filter(file => {
-        const isVideoMime = file.mimeType.startsWith('video/');
-        const isVideoExt = videoExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
-        const isShortcut = file.mimeType === 'application/vnd.google-apps.shortcut';
-        return isVideoMime || isVideoExt || isShortcut;
-      })
-      .map(file => ({
+    // 1. Separate images and videos
+    const imageFiles = allFiles.filter(file => 
+      file.mimeType.startsWith('image/') || 
+      imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext))
+    );
+
+    const videoFiles = allFiles.filter(file => {
+      const isVideoMime = file.mimeType.startsWith('video/');
+      const isVideoExt = videoExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
+      const isShortcut = file.mimeType === 'application/vnd.google-apps.shortcut';
+      return isVideoMime || isVideoExt || isShortcut;
+    });
+
+    // 2. Map videos to their matching images
+    const movies = videoFiles.map(file => {
+      const baseName = file.name.replace(/\.[^/.]+$/, ""); // Name without extension
+      
+      // Look for an image with the exact same base name
+      const matchingImage = imageFiles.find(img => {
+        const imgBaseName = img.name.replace(/\.[^/.]+$/, "");
+        return imgBaseName.toLowerCase() === baseName.toLowerCase();
+      });
+
+      // Use the matching image's webContentLink for the actual picture,
+      // fallback to thumbnail, fallback to placeholder.
+      let movieImage = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80';
+      
+      if (matchingImage) {
+        // Construct a direct image link from the file ID
+        movieImage = `https://lh3.googleusercontent.com/u/0/d/${matchingImage.id}`;
+      } else if (file.thumbnailLink) {
+        movieImage = file.thumbnailLink.replace('=s220', '=s800');
+      }
+
+      return {
         id: file.id,
-        title: file.name.replace(/\.[^/.]+$/, ""),
-        image: file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80',
+        title: baseName,
+        image: movieImage,
         size: file.size ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' : 'Unknown size',
         category: 'Action', 
-        year: '2024',
+        year: '2026', 
         downloadUrl: `/api/download?id=${file.id}`,
         streamUrl: `/api/stream?id=${file.id}`
-      }));
+      };
+    });
 
-    console.log(`Successfully identified ${movies.length} movies.`);
+    console.log(`Successfully matched ${movies.length} movies with thumbnails where available.`);
     return res.status(200).json(movies);
   } catch (error) {
     console.error('API Error:', error);
