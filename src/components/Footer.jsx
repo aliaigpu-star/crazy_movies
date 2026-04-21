@@ -10,7 +10,7 @@ const Footer = () => {
         <Row className="mb-5 g-4">
           <Col lg={5} md={12}>
             <div className="footer-brand mb-4">
-              <h3 className="fw-bold text-primary-red fs-3"><span className="logo-icon me-2">▶</span> MOVIEBOX</h3>
+              <h3 className="fw-bold text-primary-red fs-3"><span className="logo-icon me-2">▶</span> NewMoives</h3>
             </div>
             <p className="text-white-50 mb-4 pe-lg-5">
               Your private movie vault powered by Google Drive. Stream and download your personal collection with premium speed, 
@@ -28,7 +28,8 @@ const Footer = () => {
             <h5 className="fw-bold mb-4 text-white">Quick Links</h5>
             <ul className="list-unstyled footer-links">
               <li><a href="#home">Home</a></li>
-              <li><a href="#movies-section">Browse Movies</a></li>
+              <li><a href="#featured-section">Featured</a></li>
+              <li><a href="#movies-section">Browse Library</a></li>
             </ul>
           </Col>
           
@@ -47,7 +48,7 @@ const Footer = () => {
         <hr className="border-secondary opacity-25" />
         
         <div className="footer-bottom text-center pt-3">
-          <small className="text-white-30">© 2026 MovieBox. Private Media Vault.</small>
+          <small className="text-white-30">© 2026 NewMoives. Private Media Vault.</small>
         </div>
       </Container>
     </footer>

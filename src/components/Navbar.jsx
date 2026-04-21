@@ -33,7 +33,7 @@ const NavigationBar = () => {
       <Container fluid className="px-4 px-lg-5">
         <Navbar.Brand href="#home" className="fw-bold fs-4 d-flex align-items-center brand-logo">
           <span className="logo-icon me-2">▶</span>
-          <span className="brand-text">MOVIEBOX</span>
+          <span className="brand-text">NewMoives</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -42,10 +42,6 @@ const NavigationBar = () => {
             <Nav.Link href="#movies-section" className="px-3 nav-item-custom">MOVIES</Nav.Link>
           </Nav>
           <div className="d-flex align-items-center gap-3">
-            <span className="vault-status d-none d-lg-flex">
-              <i className="bi bi-shield-lock-fill"></i>
-              <span>Private Vault</span>
-            </span>
             <button 
               className="theme-toggle" 
               onClick={toggleTheme}

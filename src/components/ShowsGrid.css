@@ -106,6 +106,18 @@
   }
 }
 
+/* Compact action buttons */
+.grid-action-btn {
+  font-size: 0.78rem !important;
+  padding: 8px 12px !important;
+  letter-spacing: 0.5px;
+  border-radius: 8px !important;
+}
+
+.grid-action-btn i {
+  font-size: 0.9rem !important;
+}
+
 @media (max-width: 768px) {
   .grid-overlay {
     opacity: 1;
@@ -114,11 +126,11 @@
     -webkit-backdrop-filter: none;
     align-items: center;
     justify-content: flex-end;
-    padding: 20px;
+    padding: 16px;
   }
   
-  .grid-overlay .btn {
-    font-size: 0.75rem;
-    padding: 10px 0 !important;
+  .grid-action-btn {
+    font-size: 0.7rem !important;
+    padding: 7px 10px !important;
   }
 }

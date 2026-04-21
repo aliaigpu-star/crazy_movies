@@ -52,9 +52,12 @@
   --bg-elevated: #f1f3f5;
   --bg-overlay: rgba(255, 255, 255, 0.9);
 
-  --text-primary: #0a0a0a; /* Pure black for maximum clarity */
-  --text-secondary: #2c2c2c; /* Stronger secondary text */
-  --text-muted: #495057; /* Darker muted text */
+  --text-primary: #0a0a0a;
+  /* Pure black for maximum clarity */
+  --text-secondary: #2c2c2c;
+  /* Stronger secondary text */
+  --text-muted: #495057;
+  /* Darker muted text */
 
   --border-subtle: rgba(0, 0, 0, 0.1);
   --border-hover: rgba(0, 0, 0, 0.2);
@@ -72,7 +75,9 @@
 }
 
 /* ---------- GLOBAL RESET & BASE ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -186,7 +191,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
   transition: left 0.6s ease;
 }
 
@@ -258,9 +263,17 @@ body {
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes glow {
-  0% { box-shadow: 0 0 5px var(--primary-glow); }
-  50% { box-shadow: 0 0 20px var(--primary-glow); }
-  100% { box-shadow: 0 0 5px var(--primary-glow); }
+  0% {
+    box-shadow: 0 0 5px var(--primary-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--primary-glow);
+  }
+
+  100% {
+    box-shadow: 0 0 5px var(--primary-glow);
+  }
 }
 
 .glow-on-hover:hover {
@@ -268,13 +281,25 @@ body {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---------- THEME TOGGLE ---------- */

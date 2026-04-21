@@ -10,6 +10,20 @@ import {
 import './ShowsGrid.css';
 import AdGateModal from './AdGateModal';
 
+// Convert MB string to GB when >= 1000 MB
+const formatSize = (sizeStr) => {
+  if (!sizeStr) return sizeStr;
+  const match = sizeStr.match(/([\d.]+)\s*MB/i);
+  if (match) {
+    const mb = parseFloat(match[1]);
+    if (mb >= 1000) {
+      return (mb / 1024).toFixed(2) + ' GB';
+    }
+    return mb.toFixed(0) + ' MB';
+  }
+  return sizeStr;
+};
+
 const ShowsGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
@@ -175,25 +189,25 @@ const ShowsGrid = () => {
                     <div className="grid-overlay d-flex flex-column gap-2 p-3 justify-content-end">
                        <Button 
                         variant="primary" 
-                        className="btn-primary-blue w-100 py-3 fw-bold mb-1"
+                        className="btn-primary-blue w-100 py-2 fw-bold mb-1 grid-action-btn"
                         onClick={() => handleWatch(movie)}
                        >
-                         <i className="bi bi-play-fill me-2 fs-5"></i> WATCH ONLINE
+                         <i className="bi bi-play-fill me-1"></i> WATCH ONLINE
                        </Button>
                        <Button 
                         variant="danger" 
-                        className="btn-primary-red w-100 py-3 fw-bold"
+                        className="btn-primary-red w-100 py-2 fw-bold grid-action-btn"
                         onClick={() => handleDownload(movie)}
                         disabled={downloadingId === movie.id}
                        >
                          {downloadingId === movie.id 
-                           ? <><Spinner animation="border" size="sm" className="me-2" /> PROCESSING...</>
+                           ? <><Spinner animation="border" size="sm" className="me-1" /> PROCESSING...</>
                            : hasDownloaded 
-                             ? <><i className="bi bi-arrow-repeat me-2 fs-5"></i> DOWNLOAD AGAIN</>
-                             : <><i className="bi bi-download me-2 fs-5"></i> DOWNLOAD NOW</>
+                             ? <><i className="bi bi-arrow-repeat me-1"></i> DOWNLOAD AGAIN</>
+                             : <><i className="bi bi-download me-1"></i> DOWNLOAD NOW</>
                          }
                        </Button>
-                       {movie.size && <span className="small text-white opacity-75 text-center mt-2 fw-bold text-uppercase" style={{letterSpacing: '1px'}}>{movie.size}</span>}
+                       {movie.size && <span className="small text-white opacity-75 text-center mt-1 fw-bold text-uppercase" style={{letterSpacing: '1px', fontSize: '0.7rem'}}>{formatSize(movie.size)}</span>}
                     </div>
                     {hasDownloaded && (
                       <div className="downloaded-badge" style={{background: 'var(--primary)'}}>
