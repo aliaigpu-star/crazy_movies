@@ -13,56 +13,32 @@ export default async function handler(req, res) {
   try {
     const drive = google.drive({ version: 'v3', auth: API_KEY });
 
-    // 1. Get file metadata (we need the total size for seeking)
-    const fileMetadata = await drive.files.get({
+    // 1. Get the file metadata to find the real Google Drive direct link
+    const file = await drive.files.get({
       fileId: id,
-      fields: 'size, mimeType'
+      fields: 'webContentLink, mimeType'
     });
-    const totalSize = parseInt(fileMetadata.data.size);
 
-    // 2. Handle Range Header from browser
-    const range = req.headers.range;
-    let driveRequestOptions = { fileId: id, alt: 'media' };
-    let status = 200;
+    const streamUrl = file.data.webContentLink;
 
-    if (range) {
-      const parts = range.replace(/bytes=/, "").split("-");
-      const start = parseInt(parts[0], 10);
-      const end = parts[1] ? parseInt(parts[1], 10) : totalSize - 1;
-      const chunksize = (end - start) + 1;
-
-      console.log(`Seeking Movie ID ${id}: ${start}-${end}/${totalSize}`);
-
-      status = 206; // Partial Content
-      res.setHeader('Content-Range', `bytes ${start}-${end}/${totalSize}`);
-      res.setHeader('Content-Length', chunksize);
-      
-      // Tell Google Drive which bytes we want
-      driveRequestOptions.headers = { Range: `bytes=${start}-${end}` };
-    } else {
-      res.setHeader('Content-Length', totalSize);
+    if (!streamUrl) {
+      throw new Error('Could not generate stream link');
     }
 
-    // 3. Set standard video headers
-    res.setHeader('Content-Type', fileMetadata.data.mimeType || 'video/mp4');
-    res.setHeader('Accept-Ranges', 'bytes');
-    res.status(status);
-
-    // 4. Stream the specific range from Google
-    const response = await drive.files.get(
-      driveRequestOptions,
-      { responseType: 'stream' }
-    );
-
-    response.data
-      .on('error', err => {
-        console.error('Stream Pipe Error:', err);
-        if (!res.headersSent) res.status(500).end();
-      })
-      .pipe(res);
+    /**
+     * VERCEL STABILITY LOGIC:
+     * Instead of streaming through the server (which timeouts after 10s), 
+     * we use a 302 Redirect to Google Drive.
+     * This keeps the stream stable, supports seeking, and uses 0 Vercel bandwidth.
+     */
+    res.writeHead(302, {
+      'Location': streamUrl,
+      'Content-Type': file.data.mimeType || 'video/mp4',
+    });
+    res.end();
 
   } catch (error) {
-    console.error('Seeking Proxy Error:', error);
-    if (!res.headersSent) res.status(500).send('Unable to seek in stream');
+    console.error('Streaming Error:', error);
+    res.status(500).send('Unable to start stream. Please try again later.');
   }
 }
