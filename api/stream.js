@@ -13,32 +13,49 @@ export default async function handler(req, res) {
   try {
     const drive = google.drive({ version: 'v3', auth: API_KEY });
 
-    // 1. Get the file metadata to find the real Google Drive direct link
-    const file = await drive.files.get({
+    // 1. Get initial metadata to check if it's a shortcut
+    let fileMetadata = await drive.files.get({
       fileId: id,
-      fields: 'webContentLink, mimeType'
+      fields: 'id, name, mimeType, webContentLink, shortcutDetails'
     });
 
-    const streamUrl = file.data.webContentLink;
+    let targetId = id;
+
+    // 2. If it's a shortcut, resolve the actual file ID
+    if (fileMetadata.data.mimeType === 'application/vnd.google-apps.shortcut' && fileMetadata.data.shortcutDetails) {
+      targetId = fileMetadata.data.shortcutDetails.targetId;
+      console.log(`[RESOLVE] Shortcut "${fileMetadata.data.name}" -> Original ID: ${targetId}`);
+      
+      // Fetch metadata for the actual file
+      fileMetadata = await drive.files.get({
+        fileId: targetId,
+        fields: 'id, name, mimeType, webContentLink'
+      });
+    }
+
+    const streamUrl = fileMetadata.data.webContentLink;
 
     if (!streamUrl) {
-      throw new Error('Could not generate stream link');
+      throw new Error(`Google Drive did not provide a download link for "${fileMetadata.data.name}". Ensure the file is shared as "Anyone with the link can view".`);
     }
 
     /**
      * VERCEL STABILITY LOGIC:
-     * Instead of streaming through the server (which timeouts after 10s), 
-     * we use a 302 Redirect to Google Drive.
-     * This keeps the stream stable, supports seeking, and uses 0 Vercel bandwidth.
+     * Redirect to the direct Google Drive stream link.
      */
     res.writeHead(302, {
       'Location': streamUrl,
-      'Content-Type': file.data.mimeType || 'video/mp4',
+      'Content-Type': fileMetadata.data.mimeType || 'video/mp4',
     });
     res.end();
 
   } catch (error) {
-    console.error('Streaming Error:', error);
-    res.status(500).send('Unable to start stream. Please try again later.');
+    console.error('Streaming Error:', error.message);
+    // Send a clearer error message to the browser
+    res.status(500).json({ 
+      error: 'Streaming Failed', 
+      details: error.message,
+      suggestion: 'Check if the file is shared publicly in Google Drive.'
+    });
   }
 }
