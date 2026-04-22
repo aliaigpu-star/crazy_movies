@@ -5,12 +5,12 @@ import './Navbar.css';
 const NavigationBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('moviebox-theme') || 'dark';
+    return localStorage.getItem('newmovies-theme') || 'dark';
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('moviebox-theme', theme);
+    localStorage.setItem('newmovies-theme', theme);
   }, [theme]);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const NavigationBar = () => {
     >
       <Container fluid className="px-4 px-lg-5">
         <Navbar.Brand href="#home" className="fw-bold fs-4 d-flex align-items-center brand-logo">
-          <span className="logo-icon me-2">▶</span>
-          <span className="brand-text">NewMoives</span>
+          <img src="/favicon.png" alt="logo" className="me-2" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+          <span className="brand-text">NewMovies</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

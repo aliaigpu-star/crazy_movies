@@ -9,8 +9,9 @@ const Footer = () => {
       <Container className="px-4 px-lg-5">
         <Row className="mb-5 g-4">
           <Col lg={5} md={12}>
-            <div className="footer-brand mb-4">
-              <h3 className="fw-bold text-primary-red fs-3"><span className="logo-icon me-2">▶</span> NewMoives</h3>
+            <div className="footer-brand mb-4 d-flex align-items-center">
+              <img src="/favicon.png" alt="logo" className="me-2" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+              <h3 className="fw-bold text-primary-red fs-3 mb-0">NewMovies</h3>
             </div>
             <p className="text-white-50 mb-4 pe-lg-5">
               Your private movie vault powered by Google Drive. Stream and download your personal collection with premium speed, 
@@ -48,7 +49,7 @@ const Footer = () => {
         <hr className="border-secondary opacity-25" />
         
         <div className="footer-bottom text-center pt-3">
-          <small className="text-white-30">© 2026 NewMoives. Private Media Vault.</small>
+          <small className="text-white-30">© 2026 NewMovies. Private Media Vault.</small>
         </div>
       </Container>
     </footer>
