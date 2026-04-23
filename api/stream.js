@@ -1,5 +1,4 @@
 import { google } from 'googleapis';
-// Last Update: 2026-04-22 22:10
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -52,7 +51,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Streaming Error:', error.message);
-    // Send a clearer error message to the browser
     res.status(500).json({ 
       error: 'Streaming Failed', 
       details: error.message,
