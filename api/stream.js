@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const streamUrl = fileMetadata.data.webContentLink;
+    const streamUrl = `https://www.googleapis.com/drive/v3/files/${targetId}?alt=media&key=${API_KEY}`;
 
     if (!streamUrl) {
       throw new Error(`Google Drive did not provide a download link for "${fileMetadata.data.name}". Ensure the file is shared as "Anyone with the link can view".`);

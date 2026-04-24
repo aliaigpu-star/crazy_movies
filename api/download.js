@@ -81,7 +81,7 @@ export default async function handler(req, res) {
       fields: 'webContentLink, name'
     });
 
-    const downloadUrl = file.data.webContentLink;
+    const downloadUrl = `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${API_KEY}`;
 
     if (!downloadUrl) {
       throw new Error('Could not generate download link');
