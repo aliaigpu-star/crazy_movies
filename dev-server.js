@@ -7,6 +7,7 @@ import moviesHandler from './api/movies.js';
 import streamHandler from './api/stream.js';
 import downloadHandler from './api/download.js';
 import gateHandler from './api/gate.js';
+import imageHandler from './api/image.js';
 
 const port = Number(process.env.PORT || 5173);
 
@@ -17,6 +18,7 @@ app.all('/api/movies', (req, res) => moviesHandler(req, res));
 app.all('/api/stream', (req, res) => streamHandler(req, res));
 app.all('/api/download', (req, res) => downloadHandler(req, res));
 app.all('/api/gate', (req, res) => gateHandler(req, res));
+app.all('/api/image', (req, res) => imageHandler(req, res));
 
 // Vite dev middleware for React app + HMR
 const vite = await createViteServer({

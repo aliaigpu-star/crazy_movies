@@ -172,7 +172,7 @@ const ShowsGrid = () => {
           </Alert>
         )}
 
-        <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+        <Row xs={2} sm={3} md={4} lg={5} className="g-3 g-md-4">
           {filteredMovies.map((movie) => {
             const hasDownloaded = checkIsDownloaded(movie.id);
             return (

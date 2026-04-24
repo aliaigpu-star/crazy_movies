@@ -56,3 +56,20 @@ hr {
   border-color: var(--glass-border);
   opacity: 1;
 }
+@media (max-width: 768px) {
+  .footer-section .row {
+    text-align: center;
+  }
+
+  .footer-links {
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    justify-content: center;
+  }
+
+  .d-flex.gap-3 {
+    justify-content: center;
+  }
+}

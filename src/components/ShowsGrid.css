@@ -21,6 +21,19 @@
   position: relative;
   overflow: hidden;
   background-color: var(--bg-elevated);
+  height: 380px;
+}
+
+@media (max-width: 991.98px) {
+  .grid-img-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .grid-img-container {
+    height: 240px !important;
+  }
 }
 
 .grid-img-container img {
@@ -74,6 +87,12 @@
   border-radius: var(--radius-lg);
 }
 
+@media (max-width: 575.98px) {
+  .movie-player-modal .modal-content {
+    border-radius: 0;
+  }
+}
+
 .movie-player-modal video {
   border-bottom: 3px solid var(--primary);
 }
@@ -82,6 +101,12 @@
   min-height: 250px;
   background: linear-gradient(135deg, #000, #1a1a1a);
   border-style: dashed !important;
+}
+
+@media (max-width: 575.98px) {
+  .ad-slot {
+    min-height: 180px;
+  }
 }
 
 .border-dashed {
@@ -119,18 +144,68 @@
 }
 
 @media (max-width: 768px) {
+  .shows-grid-section {
+    padding: 40px 0;
+  }
+
+  .text-glow {
+    font-size: 1.6rem;
+  }
+
+  .movie-count-pill {
+    padding: 4px 12px;
+    font-size: 0.7rem;
+  }
+
   .grid-overlay {
     opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     align-items: center;
     justify-content: flex-end;
-    padding: 16px;
+    padding: 10px;
   }
   
   .grid-action-btn {
+    font-size: 0.65rem !important;
+    padding: 6px 10px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .card-body {
+    padding: 10px !important;
+  }
+
+  .card-title {
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .premium-badge {
+    font-size: 0.5rem;
+    padding: 2px 6px;
+  }
+
+  .downloaded-badge {
+    padding: 4px 8px;
+    font-size: 0.55rem;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .grid-action-btn {
     font-size: 0.7rem !important;
-    padding: 7px 10px !important;
+    padding: 8px 12px !important;
+  }
+
+  .card-title {
+    font-size: 0.75rem !important;
+  }
+  
+  .small.text-white.opacity-75 {
+     display: none; /* Hide size on very small screens to save space */
   }
 }

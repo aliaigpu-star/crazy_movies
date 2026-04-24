@@ -89,33 +89,53 @@ export const fetchMoviesFromDrive = async () => {
 
 const getMockMovies = () => [
   { 
-    id: '1', 
-    title: 'KGF Chapter 2', 
-    image: 'https://upload.wikimedia.org/wikipedia/en/d/d0/K.G.F_Chapter_2.jpg', 
+    id: 'm1', 
+    title: 'The Raja Saab', 
+    image: 'https://cdn.filmibeat.com/ph/2024/01/the-raja-saab_170530739910.jpg', 
     category: 'Action', 
-    year: '2022', 
-    size: '1.2 GB',
-    streamUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    downloadUrl: '/api/download?id=1'
-  },
-  { 
-    id: '2', 
-    title: 'Kalki 2898 AD', 
-    image: 'https://upload.wikimedia.org/wikipedia/en/4/4c/Kalki_2898_AD_poster.jpg', 
-    category: 'Sci-Fi', 
-    year: '2024', 
-    size: '2.5 GB',
-    streamUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-    downloadUrl: '/api/download?id=2'
-  },
-  { 
-    id: '3', 
-    title: 'Baahubali 2', 
-    image: 'https://upload.wikimedia.org/wikipedia/en/9/93/Baahubali_2_The_Conclusion_poster.jpg', 
-    category: 'Fantasy', 
-    year: '2017', 
+    year: '2026', 
     size: '1.8 GB',
-    streamUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    downloadUrl: '/api/download?id=3'
+    streamUrl: '/api/stream?id=mock1',
+    downloadUrl: '/api/download?id=mock1'
   },
+  { 
+    id: 'm2', 
+    title: 'Pushpa 2: The Rule', 
+    image: 'https://images.firstpost.com/uploads/2024/04/Pushpa-2-The-Rule-teaser.jpg', 
+    category: 'Action', 
+    year: '2024', 
+    size: '2.2 GB',
+    streamUrl: '/api/stream?id=mock2',
+    downloadUrl: '/api/download?id=mock2'
+  },
+  { 
+    id: 'm3', 
+    title: 'Singham Again', 
+    image: 'https://m.media-amazon.com/images/M/MV5BMjA4MDY5MjYtZGYyZi00MzllLThlMGUtYmU0MGYzMDUyYmU1XkEyXkFqcGc@._V1_.jpg', 
+    category: 'Action', 
+    year: '2024', 
+    size: '1.5 GB',
+    streamUrl: '/api/stream?id=mock3',
+    downloadUrl: '/api/download?id=mock3'
+  },
+  { 
+    id: 'm4', 
+    title: 'Munjya', 
+    image: 'https://m.media-amazon.com/images/M/MV5BN2YwYjFhMTAtN2I5Mi00YmY0LWE2NGYtYmE0YzFkYjQ3YzgxXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg', 
+    category: 'Horror', 
+    year: '2024', 
+    size: '950 MB',
+    streamUrl: '/api/stream?id=mock4',
+    downloadUrl: '/api/download?id=mock4'
+  },
+  { 
+    id: 'm5', 
+    title: 'Bhooth Bangla', 
+    image: 'https://m.media-amazon.com/images/M/MV5BNzU1N2U3Y2UtZDYzMy00ZDRhLTliZjktZmE4ZjYxYmU5ZjE4XkEyXkFqcGdeQXVyMTUzOTcyODA5._V1_.jpg', 
+    category: 'Comedy', 
+    year: '2026', 
+    size: '1.4 GB',
+    streamUrl: '/api/stream?id=mock5',
+    downloadUrl: '/api/download?id=mock5'
+  }
 ];

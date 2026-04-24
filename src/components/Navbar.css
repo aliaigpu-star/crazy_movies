@@ -93,4 +93,34 @@
     background-color: var(--bg-surface);
     padding: 0.5rem 0;
   }
+  
+  .navbar-collapse {
+    background: var(--bg-surface);
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-hover);
+    border: 1px solid var(--glass-border);
+  }
+
+  .nav-item-custom {
+    padding: 12px 0 !important;
+    text-align: center;
+  }
+
+  .nav-item-custom::after {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brand-text {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .brand-logo img {
+    width: 28px !important;
+    height: 28px !important;
+  }
 }
