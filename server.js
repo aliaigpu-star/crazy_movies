@@ -17,7 +17,7 @@ app.use(express.json());
 app.get('/api/movies', (req, res) => moviesHandler(req, res));
 app.get('/api/stream', (req, res) => streamHandler(req, res));
 app.get('/api/download', (req, res) => downloadHandler(req, res));
-app.post('/api/gate', (req, res) => gateHandler(req, res));
+app.all('/api/gate', (req, res) => gateHandler(req, res));
 app.get('/api/image', (req, res) => imageHandler(req, res));
 
 app.listen(port, '0.0.0.0', () => {
