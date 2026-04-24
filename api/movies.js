@@ -56,9 +56,9 @@ export default async function handler(req, res) {
 
       let movieImage = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80';
       
-      if (matchingImgFile) {
+      if (matchingImgFile && matchingImgFile.thumbnailLink) {
         console.log(`[MATCH] Video: "${file.name}" -> Poster: "${matchingImgFile.name}"`);
-        movieImage = `/api/image?id=${matchingImgFile.id}`;
+        movieImage = matchingImgFile.thumbnailLink.replace('=s220', '=s800');
       } else if (file.thumbnailLink) {
         movieImage = file.thumbnailLink.replace('=s220', '=s800');
       }
