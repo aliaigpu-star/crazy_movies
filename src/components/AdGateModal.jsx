@@ -35,18 +35,23 @@ export default function AdGateModal({
     return () => clearTimeout(t);
   }, [show, secondsLeft]);
 
-  const handleContinue = async () => {
-    if (!canContinue) return;
-    
-    // Open the HilltopAds Direct Link in a new tab
-    window.open('https://fluffy-machine.com/bt3.VB0EPZ3/pVvEbzmmVoJCZCDQ0o2mOVTHkL2FNxzBAd5aLBTZYU5/OMTOY/3/M_T/Mn', '_blank');
+  const [adClicked, setAdClicked] = useState(false);
 
+  const handleOpenAd = () => {
+    // Open the HilltopAds Direct Link
+    window.open('https://fluffy-machine.com/bt3.VB0EPZ3/pVvEbzmmVoJCZCDQ0o2mOVTHkL2FNxzBAd5aLBTZYU5/OMTOY/3/M_T/Mn', '_blank');
+    setAdClicked(true);
+  };
+
+  const handleContinue = async () => {
+    if (!canContinue || !adClicked) return;
     setBusy(true);
     try {
       await onComplete?.();
       onHide?.();
     } finally {
       setBusy(false);
+      setAdClicked(false);
     }
   };
 
@@ -67,18 +72,32 @@ export default function AdGateModal({
           Verify your request to unlock <strong>{title}</strong>.
         </p>
         <p className="text-secondary small mb-4">
-          This secure gate ensures the safety of our drive vault. The download button will activate after the cooldown.
+          {adClicked 
+            ? "Verification complete! You can now start your download below." 
+            : "Complete the security step below to generate your high-speed download link."}
         </p>
 
-        <div className="ad-slot rounded-4 border bg-black d-flex align-items-center justify-content-center mb-4 shadow-inner">
+        <div className="ad-slot rounded-4 border bg-black d-flex align-items-center justify-content-center mb-4 shadow-inner" style={{cursor: 'pointer'}} onClick={!adClicked ? handleOpenAd : undefined}>
           <div className="text-center px-3 py-5">
-            <div className="text-white opacity-25 display-4 mb-2">
-               <i className="bi bi-shield-lock"></i>
-            </div>
-            <div className="text-white fw-bold mb-1 fs-5">Security Check in Progress</div>
-            <div className="text-white-50 small">
-              Analyzing connection security...
-            </div>
+            {adClicked ? (
+              <>
+                <div className="text-success display-4 mb-2">
+                   <i className="bi bi-patch-check-fill"></i>
+                </div>
+                <div className="text-white fw-bold mb-1 fs-5">Link Generated Successfully!</div>
+                <div className="text-success-50 small">Click the red button below to start.</div>
+              </>
+            ) : (
+              <>
+                <div className="text-white opacity-25 display-4 mb-2">
+                   <i className="bi bi-shield-lock"></i>
+                </div>
+                <div className="text-white fw-bold mb-1 fs-5">Click Here to Unlock Link</div>
+                <div className="text-white-50 small">
+                  Analyze connection & bypass bot protection
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -86,29 +105,44 @@ export default function AdGateModal({
           <div className="small fw-semibold">
             {secondsLeft > 0 ? (
               <span className="text-secondary">
-                Verifying in 1, <strong>{secondsLeft}s</strong>…
+                Wait <strong>{secondsLeft}s</strong>…
+              </span>
+            ) : adClicked ? (
+              <span className="text-success">
+                <i className="bi bi-check-circle-fill me-2"></i>Verified & Ready.
               </span>
             ) : (
-              <span className="text-success">
-                <i className="bi bi-check-circle-fill me-2"></i>Verified. Safe to proceed.
+              <span className="text-warning">
+                <i className="bi bi-info-circle-fill me-2"></i>Complete step above.
               </span>
             )}
           </div>
 
-          <Button
-            variant="danger"
-            className="btn-primary-red px-5 fw-bold"
-            onClick={handleContinue}
-            disabled={!canContinue}
-          >
-            {busy ? (
-              <>
-                <Spinner animation="border" size="sm" className="me-2" /> Unlocking...
-              </>
-            ) : (
-              'Get My Movie'
-            )}
-          </Button>
+          {!adClicked ? (
+            <Button
+              variant="primary"
+              className="btn-primary-blue px-5 fw-bold"
+              onClick={handleOpenAd}
+              disabled={secondsLeft > 0}
+            >
+              Unlock Download Link
+            </Button>
+          ) : (
+            <Button
+              variant="danger"
+              className="btn-primary-red px-5 fw-bold"
+              onClick={handleContinue}
+              disabled={!canContinue || busy}
+            >
+              {busy ? (
+                <>
+                  <Spinner animation="border" size="sm" className="me-2" /> Starting...
+                </>
+              ) : (
+                'Start Download Now'
+              )}
+            </Button>
+          )}
         </div>
       </Modal.Body>
     </Modal>
