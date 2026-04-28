@@ -6,18 +6,15 @@ const AdBanner = () => {
   useEffect(() => {
     if (adContainer.current && !adContainer.current.firstChild) {
       const script = document.createElement('script');
-      script.innerHTML = `
-        (function(toe){
-          var d = document,
-              s = d.createElement('script'),
-              l = d.scripts[d.scripts.length - 1];
-          s.settings = toe || {};
-          s.src = "\\/\\/shameful-farm.com\\/b.XsVds_dcGGlZ0aYEW\\/ci\\/feDmb9hufZnUDlOkBPkTLYE5\\/OiTcYK3nMbz\\/MftKNSjBkC5\\/N\\/jacWzgN\\/wU";
-          s.async = true;
-          s.referrerPolicy = 'no-referrer-when-downgrade';
-          l.parentNode.insertBefore(s, l);
-        })({})
-      `;
+      script.src = "//shameful-farm.com/b.XsVds_dcGGlZ0aYEW/ci/feDmb9hufZnUDlOkBPkTLYE5/OiTcYK3nMbz/MftKNSjBkC5/N/jacWzgN/wU";
+      script.async = true;
+      script.referrerPolicy = 'no-referrer-when-downgrade';
+      
+      // HilltopAds settings
+      script.onload = () => {
+        console.log('Ad script loaded');
+      };
+
       adContainer.current.appendChild(script);
     }
   }, []);
