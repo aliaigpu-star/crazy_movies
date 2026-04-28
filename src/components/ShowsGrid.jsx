@@ -9,6 +9,7 @@ import {
 } from '../services/googleDrive';
 import './ShowsGrid.css';
 import AdGateModal from './AdGateModal';
+import AdBanner from './AdBanner';
 
 // Convert MB string to GB when >= 1000 MB
 const formatSize = (sizeStr) => {
@@ -156,6 +157,8 @@ const ShowsGrid = () => {
               )}
             </div>
           </div>
+          
+          <AdBanner />
         </div>
 
         {error && <Alert variant="danger" className="text-danger border-danger glass-card mb-5">{error}</Alert>}
