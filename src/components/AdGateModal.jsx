@@ -37,6 +37,10 @@ export default function AdGateModal({
 
   const handleContinue = async () => {
     if (!canContinue) return;
+    
+    // Open the HilltopAds Direct Link in a new tab
+    window.open('https://fluffy-machine.com/bt3.VB0EPZ3/pVvEbzmmVoJCZCDQ0o2mOVTHkL2FNxzBAd5aLBTZYU5/OMTOY/3/M_T/Mn', '_blank');
+
     setBusy(true);
     try {
       await onComplete?.();
